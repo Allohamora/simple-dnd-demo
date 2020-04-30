@@ -21,6 +21,9 @@ const FormList = (props: FormListProps) => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if( !value.trim() ) return;
+
         setItems(
             [
                 ...items, 
@@ -45,8 +48,8 @@ const FormList = (props: FormListProps) => {
     }
 
     return (
-        <>
-            <form onSubmit={submitHandler} >
+        <div className="form-list__wrap" >
+            <form onSubmit={submitHandler} className="form-list" >
                 <input
                     type="text"
                     value={value}
@@ -55,7 +58,7 @@ const FormList = (props: FormListProps) => {
                 <button>send</button>
             </form>
             <List items={items} removeHandler={removeHandler} addHandler={addHandler} />
-        </>
+        </div>
     );
 };
 
