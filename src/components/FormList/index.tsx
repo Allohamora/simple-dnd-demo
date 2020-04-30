@@ -21,6 +21,9 @@ const FormList = (props: FormListProps) => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if( !value.trim() ) return;
+
         setItems(
             [
                 ...items, 
