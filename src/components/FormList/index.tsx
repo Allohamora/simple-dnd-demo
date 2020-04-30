@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { List } from '../List';
 
 interface FormListProps {
-
+    
 };
 
 export interface Item {
     id: string,
     text: string,
 }
+
+export type RemoveHandler = (received: Item) => void;
+export type AddHandler = (received: Item) => void;
 
 const FormList = (props: FormListProps) => {
 
@@ -29,6 +32,14 @@ const FormList = (props: FormListProps) => {
         setValue("");
     };
 
+    const removeHandler = (received: Item) => {
+        setItems( items.filter( item => !(item.id === received.id ) ) );
+    }
+
+    const addHandler = (received: Item) => {
+        setItems( [...items, received] );
+    }
+
     return (
         <>
             <form onSubmit={submitHandler} >
@@ -39,7 +50,7 @@ const FormList = (props: FormListProps) => {
                 />
                 <button>send</button>
             </form>
-            <List items={items} />
+            <List items={items} removeHandler={removeHandler} addHandler={addHandler} />
         </>
     );
 };
