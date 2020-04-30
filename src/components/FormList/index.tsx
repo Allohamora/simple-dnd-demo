@@ -48,17 +48,18 @@ const FormList = (props: FormListProps) => {
     }
 
     return (
-        <>
-            <form onSubmit={submitHandler} >
+        <div className="form__wrap">
+            <form onSubmit={submitHandler} className="form" >
                 <input
                     type="text"
                     value={value}
+                    placeholder="Enter li text"
                     onChange={e => setValue(e.target.value)}
                 />
                 <button>send</button>
             </form>
             <List items={items} removeHandler={removeHandler} addHandler={addHandler} />
-        </>
+        </div>
     );
 };
 

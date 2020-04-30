@@ -25,10 +25,8 @@ const ListCell = (props: ListCellProps) => {
 
     return (
         <li
+            className={ "list__item" + (isDrag ? " drag" : "") }
             ref={drag}
-            style={{
-                backgroundColor: isDrag ? "yellow" : "green"
-            }}
         >
             {
                 item.text

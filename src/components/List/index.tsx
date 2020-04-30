@@ -35,10 +35,8 @@ const List = (props: ListProps) => {
 
     return (
         <ul
+            className={"list" + (isOver ? " drop" : "")}
             ref={drop}
-            style={{
-                backgroundColor: isOver ? "green" : "teal"
-            }}
         >
             {
                 items.map( item => (
