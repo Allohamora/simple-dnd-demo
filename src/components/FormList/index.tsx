@@ -11,7 +11,7 @@ export interface Item {
 }
 
 export type RemoveHandler = (received: Item) => void;
-export type AddHandler = (received: Item) => void;
+export type AddHandler = (received: Item) => boolean;
 
 const FormList = (props: FormListProps) => {
 
@@ -37,7 +37,11 @@ const FormList = (props: FormListProps) => {
     }
 
     const addHandler = (received: Item) => {
+        const isInItems: boolean = !!items.find( item => item.id === received.id );
+        if( isInItems ) return false;
+
         setItems( [...items, received] );
+        return true;
     }
 
     return (

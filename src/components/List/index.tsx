@@ -22,8 +22,11 @@ const List = (props: ListProps) => {
     const [{isOver}, drop] = useDrop({
         accept: ItemTypes.item,
         drop: (dropItem: DropArgumentItem) => {
-            dropItem.removeHandler(dropItem.item);
-            addHandler(dropItem.item);
+            const isSucess: boolean = addHandler(dropItem.item);
+
+            if( isSucess ){
+                dropItem.removeHandler(dropItem.item);
+            }
         },
         collect: monitor => ({
             isOver: monitor.isOver()
