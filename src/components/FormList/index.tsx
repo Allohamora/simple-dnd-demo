@@ -14,7 +14,7 @@ export type ReplaceHandler = (item: Item, index: number) => void;
 
 const arrReplace = <T extends {}>(arr: T[], item: T, index: number) => {
     const filtered = arr.filter( value => !(value === item) );
-    const spliced = filtered.splice(index, Infinity);
+    const spliced = filtered.splice(index, filtered.length);
     filtered.push(item, ...spliced);
     return filtered;
 }
