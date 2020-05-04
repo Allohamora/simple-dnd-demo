@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { List } from '../List';
+import React, { useState, useCallback } from 'react';
+import { ListCell, ItemDrop } from '../ListCell';
 
 interface FormListProps {
-    
+
 };
 
 export interface Item {
@@ -10,56 +10,46 @@ export interface Item {
     text: string,
 }
 
-export type RemoveHandler = (received: Item) => void;
-export type AddHandler = (received: Item) => boolean;
+export type ReplaceHandler = (item: Item, index: number) => void; 
+
+const arrReplace = <T extends {}>(arr: T[], item: T, index: number) => {
+    const filtered = arr.filter( value => !(value === item) );
+    const spliced = filtered.splice(index, Infinity);
+    filtered.push(item, ...spliced);
+    return filtered;
+}
 
 const FormList = (props: FormListProps) => {
 
-    const [items, setItems] = useState<Item[]>([]);
+    const [items, setItems] = useState<Item[]>([
+        {
+            id: "12",
+            text: "aa"
+        },
+        {
+            id: "111",
+            text: "222"
+        },
+        {
+            id: "ara",
+            text: "444",
+        }
+    ]);
 
-    const [value, setValue] = useState("");
-
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if( !value.trim() ) return;
-
-        setItems(
-            [
-                ...items, 
-                { 
-                    id: (Math.random() * 1e6).toFixed(0),
-                    text: value
-                }
-            ]);
-        setValue("");
+    const replaceHandler = (item: Item, index: number) => {
+        setItems(arrReplace(items, item, index));
     };
 
-    const removeHandler = (received: Item) => {
-        setItems( items.filter( item => !(item.id === received.id ) ) );
-    }
-
-    const addHandler = (received: Item) => {
-        const isInItems: boolean = !!items.find( item => item.id === received.id );
-        if( isInItems ) return false;
-
-        setItems( [...items, received] );
-        return true;
-    }
-
     return (
-        <div className="form__wrap">
-            <form onSubmit={submitHandler} className="form" >
-                <input
-                    type="text"
-                    value={value}
-                    placeholder="Enter li text"
-                    onChange={e => setValue(e.target.value)}
-                />
-                <button>send</button>
-            </form>
-            <List items={items} removeHandler={removeHandler} addHandler={addHandler} />
-        </div>
+        <ul style={{
+            padding: "10px 20px"
+        }} >
+            {
+                items.map( (item, i) => (
+                    <ListCell key={item.id} item={item} index={i} replaceHandler={replaceHandler} />
+                ) )
+            }
+        </ul>
     );
 };
 
