@@ -1,13 +1,13 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import Backend from "react-dnd-html5-backend"
-import { FormList } from './components/FormList';
+import { Items } from 'components/Items';
 
 function App() {
   return (
     <div className="app">
       <DndProvider backend={Backend} >
-        <FormList />
+        <Items />
       </DndProvider>
     </div>
   );

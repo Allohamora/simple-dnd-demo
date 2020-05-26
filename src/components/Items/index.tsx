@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import { ListCell, ItemDrop } from '../ListCell';
+import React, { useState } from 'react';
+import { ItemsCell, ItemDrop } from './ItemsCell';
 
-interface FormListProps {
+interface ItemsProps {
 
 };
 
@@ -19,7 +19,7 @@ const arrReplace = <T extends {}>(arr: T[], item: T, index: number) => {
     return filtered;
 }
 
-const FormList = (props: FormListProps) => {
+const Items = (props: ItemsProps) => {
 
     const [items, setItems] = useState<Item[]>([
         {
@@ -46,11 +46,11 @@ const FormList = (props: FormListProps) => {
         }} >
             {
                 items.map( (item, i) => (
-                    <ListCell key={item.id} item={item} index={i} replaceHandler={replaceHandler} />
+                    <ItemsCell key={item.id} item={item} index={i} replaceHandler={replaceHandler} />
                 ) )
             }
         </ul>
     );
 };
 
-export { FormList };
+export { Items };

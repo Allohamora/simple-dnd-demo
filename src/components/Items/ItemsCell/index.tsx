@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { Item, ReplaceHandler } from '../FormList';
+import { Item, ReplaceHandler } from '../';
 import { useDrag, useDrop, DragObjectWithType } from 'react-dnd';
-import { ItemTypes } from '../../dndTypes';
+import { ItemTypes } from 'dndTypes';
 
-interface ListCellProps {
+interface ItemsCellProps {
     item: Item,
     index: number,
     replaceHandler: ReplaceHandler,
@@ -19,7 +19,7 @@ const hoverOptions = {
     delay: 300,
 };
 
-const ListCell = (props: ListCellProps) => {
+const ItemsCell = (props: ItemsCellProps) => {
 
     const {item, index, replaceHandler} = props;
     const ref = useRef(null);
@@ -71,4 +71,4 @@ const ListCell = (props: ListCellProps) => {
     );
 };
 
-export { ListCell };
+export { ItemsCell };
