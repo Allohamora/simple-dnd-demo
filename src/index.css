@@ -13,7 +13,7 @@ ul {
   margin: 0;
 }
 
-.app {
+.test {
   display: flex;
   justify-content: space-around;
 }
