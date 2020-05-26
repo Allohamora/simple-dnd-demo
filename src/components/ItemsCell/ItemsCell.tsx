@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
-import { Item, ReplaceHandler } from '../';
+import { Item, ReplaceHandler } from 'containers/Items';
 import { useDrag, useDrop, DragObjectWithType } from 'react-dnd';
 import { ItemTypes } from 'dndTypes';
+import styled from 'styled-components';
 
 interface ItemsCellProps {
     item: Item,
@@ -18,6 +19,14 @@ const hoverOptions = {
     isReady: true,
     delay: 300,
 };
+
+const Li = styled.li<{drag?: boolean, drop?: boolean}>`
+    border: 2px solid gray;
+    padding: 5px;
+    margin: 5px;
+    opacity: ${props => props.drag ? ".5" : "1"};
+    background-color: ${props => props.drop ? "blue" : "transparent"};
+`;
 
 const ItemsCell = (props: ItemsCellProps) => {
 
@@ -55,19 +64,15 @@ const ItemsCell = (props: ItemsCellProps) => {
     drop(drag(ref));
 
     return (
-        <li
-         ref={ref}
-         style={{
-            border: "2px solid gray",
-            padding: 5,
-            margin: 5,
-            opacity: isDrag ? ".5" : 1,
-            backgroundColor: isOver ? "blue" : "transparent",
-        }} >
+        <Li
+            ref={ref}
+            drop={isOver}
+            drag={isDrag}
+         >
             {
                 item.text
             }
-        </li>
+        </Li>
     );
 };
 

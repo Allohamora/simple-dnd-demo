@@ -1,21 +1,33 @@
 import React from 'react';
 
-import { Custom } from 'components/Custom';
 import { DndProvider } from 'react-dnd';
 import Backend from "react-dnd-html5-backend"
-import { Items } from 'components/Items';
+
+import { Custom } from "containers/Custom";
+import { Items } from "containers/Items";
+ 
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 function App() {
   return (
     <div className="app">
       <DndProvider backend={Backend} >
 
-        <div className="test">
+        <Container>
+
           <Custom />
           <Custom />
-        </div>
+          
+        </Container>
         
         <Items />
+        
       </DndProvider>
     </div>
   );

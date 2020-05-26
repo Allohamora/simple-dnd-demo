@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { List } from './List';
+import { List } from 'containers/List';
+import styled from "styled-components";
 
 interface CustomProps {
     
@@ -12,6 +13,13 @@ export interface Item {
 
 export type RemoveHandler = (received: Item) => void;
 export type AddHandler = (received: Item) => boolean;
+
+const Wrap = styled.div`
+    padding-top: 20px;
+    min-width: 100px;
+    width: 40%;
+`;
+
 
 const Custom = (props: CustomProps) => {
 
@@ -48,18 +56,20 @@ const Custom = (props: CustomProps) => {
     }
 
     return (
-        <div className="form__wrap">
-            <form onSubmit={submitHandler} className="form" >
+        <Wrap>
+            <form onSubmit={submitHandler} >
                 <input
                     type="text"
                     value={value}
                     placeholder="Enter li text"
                     onChange={e => setValue(e.target.value)}
                 />
+                
                 <button>send</button>
             </form>
+
             <List items={items} removeHandler={removeHandler} addHandler={addHandler} />
-        </div>
+        </Wrap>
     );
 };
 

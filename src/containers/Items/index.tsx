@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ItemsCell, ItemDrop } from './ItemsCell';
+import { ItemsCell } from 'components/ItemsCell';
+import styled from 'styled-components';
 
 interface ItemsProps {
 
@@ -18,6 +19,10 @@ const arrReplace = <T extends {}>(arr: T[], item: T, index: number) => {
     filtered.push(item, ...spliced);
     return filtered;
 }
+
+const Ul = styled.ul`
+    padding: 10px 20px;
+`;
 
 const Items = (props: ItemsProps) => {
 
@@ -41,15 +46,13 @@ const Items = (props: ItemsProps) => {
     };
 
     return (
-        <ul style={{
-            padding: "10px 20px"
-        }} >
+        <Ul>
             {
                 items.map( (item, i) => (
                     <ItemsCell key={item.id} item={item} index={i} replaceHandler={replaceHandler} />
                 ) )
             }
-        </ul>
+        </Ul>
     );
 };
 
