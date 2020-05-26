@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDrag } from "react-dnd";
-import { Item, RemoveHandler } from '../FormList';
-import { ItemTypes } from '../../dndTypes';
+import { Item, RemoveHandler } from '../../../Custom';
+import { ItemTypes } from 'dndTypes';
 
 interface ListCellProps {
     item: Item,

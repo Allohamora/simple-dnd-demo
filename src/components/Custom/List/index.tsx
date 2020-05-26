@@ -1,8 +1,8 @@
 import React from 'react';
-import { Item, RemoveHandler, AddHandler } from '../FormList';
-import { ListCell } from '../ListCell';
+import { Item, RemoveHandler, AddHandler } from '../../Custom';
+import { ListCell } from './ListCell';
 import { useDrop, DragObjectWithType } from 'react-dnd';
-import { ItemTypes } from '../../dndTypes';
+import { ItemTypes } from 'dndTypes';
 
 interface ListProps {
     items: Item[],

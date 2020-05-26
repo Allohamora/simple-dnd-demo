@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { List } from '../List';
+import { List } from './List';
 
-interface FormListProps {
+interface CustomProps {
     
 };
 
@@ -13,7 +13,7 @@ export interface Item {
 export type RemoveHandler = (received: Item) => void;
 export type AddHandler = (received: Item) => boolean;
 
-const FormList = (props: FormListProps) => {
+const Custom = (props: CustomProps) => {
 
     const [items, setItems] = useState<Item[]>([]);
 
@@ -63,4 +63,4 @@ const FormList = (props: FormListProps) => {
     );
 };
 
-export { FormList };
+export { Custom };
