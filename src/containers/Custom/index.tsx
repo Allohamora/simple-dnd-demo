@@ -61,7 +61,7 @@ const Custom = (props: CustomProps) => {
                 <input
                     type="text"
                     value={value}
-                    placeholder="Enter li text"
+                    placeholder="Enter item text"
                     onChange={e => setValue(e.target.value)}
                 />
                 

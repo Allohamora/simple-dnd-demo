@@ -14,18 +14,22 @@ const Container = styled.div`
   justify-content: space-around;
 `;
 
+const H2 = styled.h2`
+  text-align: center;
+`;
+
 function App() {
   return (
     <div className="app">
       <DndProvider backend={Backend} >
 
+        <H2>Block 1</H2>
         <Container>
-
           <Custom />
           <Custom />
-          
         </Container>
-        
+
+        <H2>Block 2</H2>
         <Items />
         
       </DndProvider>

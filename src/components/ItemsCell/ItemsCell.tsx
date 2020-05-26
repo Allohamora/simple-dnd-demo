@@ -34,7 +34,7 @@ const ItemsCell = (props: ItemsCellProps) => {
     const ref = useRef(null);
 
     const [{isOver}, drop] = useDrop({
-        accept: ItemTypes.item,
+        accept: ItemTypes.itemsCell,
         hover: (item: ItemDrop, monitor) => {
             if( !hoverOptions.isReady ) return;
 
@@ -52,7 +52,7 @@ const ItemsCell = (props: ItemsCellProps) => {
 
     const [{isDrag}, drag] = useDrag({
         item: {
-            type: ItemTypes.item,
+            type: ItemTypes.itemsCell,
             index,
             item
         },

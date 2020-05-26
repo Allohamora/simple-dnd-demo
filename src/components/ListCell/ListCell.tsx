@@ -21,7 +21,7 @@ const ListCell = (props: ListCellProps) => {
 
     const [{ isDrag }, drag] = useDrag({
         item: {
-            type: ItemTypes.item,
+            type: ItemTypes.listCell,
             removeHandler,
             item,
         },

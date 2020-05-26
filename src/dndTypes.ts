@@ -1,3 +1,4 @@
 export const ItemTypes = {
-    item: "item"
+    listCell: "listCell",
+    itemsCell: "itemsCell"
 };

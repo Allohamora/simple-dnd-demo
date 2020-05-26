@@ -31,7 +31,7 @@ const List = (props: ListProps) => {
     const {items, removeHandler, addHandler} = props;
 
     const [{isOver}, drop] = useDrop({
-        accept: ItemTypes.item,
+        accept: ItemTypes.listCell,
         drop: (dropItem: DropArgumentItem) => {
             const isSucess: boolean = addHandler(dropItem.item);
 
