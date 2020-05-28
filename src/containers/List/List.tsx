@@ -1,64 +1,69 @@
 import React from 'react';
-import { Item, RemoveHandler, AddHandler } from 'containers/Custom';
-import { ListCell } from 'components/ListCell';
-import { useDrop, DragObjectWithType } from 'react-dnd';
-import { ItemTypes } from 'dndTypes';
+import { Droppable } from "react-beautiful-dnd";
 import styled from 'styled-components';
+import { Quote } from 'components/Quote';
+import { iQuote } from 'components/Quote/Quote';
+
+const Container = styled.div`
+    background-color: white;
+    border: 2px solid gray;
+
+    border-radius: 5px;
+
+    width: 100%;
+
+    margin: 5px;
+    padding: 5px;
+`;
+
+const Title = styled.h2`
+    text-align: center;
+
+    border: 2px solid lightgray;
+    margin: 0;
+`;
+
+const Quotes = styled.div<{ isOver: boolean }>`
+    min-height: 100px;
+    background-color: ${props => props.isOver ? "lightblue" : "transparent"};
+
+    padding: 5px;
+`;
+
+export type iQuotes = iQuote[];
 
 interface ListProps {
-    items: Item[],
-    removeHandler: RemoveHandler,
-    addHandler: AddHandler,
+    title: string,
+    quotes: iQuotes,
+    id: string,
 };
-
-interface DropArgumentItem extends DragObjectWithType {
-    item: Item,
-    removeHandler: RemoveHandler,
-}
-
-const Ul = styled.ul<{drop?: boolean}>`
-    transition: all .5s;
-
-    margin-top: 10px;
-    min-height: 100px;
-    padding: 10px;
-    background-color: ${ props => props.drop ? "#3498db" : "#f1c40f" };
-    border: 2px solid #e74c3c;
-`;
 
 const List = (props: ListProps) => {
 
-    const {items, removeHandler, addHandler} = props;
-
-    const [{isOver}, drop] = useDrop({
-        accept: ItemTypes.listCell,
-        drop: (dropItem: DropArgumentItem) => {
-            const isSucess: boolean = addHandler(dropItem.item);
-
-            if( isSucess ){
-                dropItem.removeHandler(dropItem.item);
-            }
-        },
-        collect: monitor => ({
-            isOver: monitor.isOver()
-        })
-    })
+    const {quotes, id} = props;
 
     return (
-        <Ul
-            drop={isOver}
-            ref={drop}
-        >
-            {
-                items.map( item => (
-                    <ListCell
-                        key={item.id}
-                        item={item}
-                        removeHandler={removeHandler}
-                    />
-                ) )
-            }
-        </Ul>
+        <Container>
+            <Title>
+                {props.title}
+            </Title>
+
+            <Droppable droppableId={id} >
+                {(provided, snapshot) => (
+                    <Quotes 
+                        isOver={snapshot.isDraggingOver}
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                    >
+                        {quotes.map((quote, i) => (
+                            <Quote key={quote.id} {...quote} index={i} />
+                        ))}
+                        {provided.placeholder}
+                    </Quotes>
+                )}
+            </Droppable>
+
+        </Container>
     );
 };
 
