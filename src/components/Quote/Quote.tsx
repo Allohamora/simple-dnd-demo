@@ -13,19 +13,20 @@ export interface iQuote {
 
 const Container = styled.div`
     border: 2px solid rgba(0,0,0, .5);
-    margin: 5px 0;
+    margin-bottom: 5px;
+    padding-left: 2px;
 `;
 
 const Quote = (props: QuoteProps) => {
 
-    const {index, id, text} = props;
+    const { index, id, text } = props;
 
     return (
-        <Draggable 
-            index={ index }
-            draggableId={ id }
+        <Draggable
+            index={index}
+            draggableId={id}
         >
-            {(provided, snapshot) => (
+            {provided => (
                 <Container
                     ref={provided.innerRef}
                     {...provided.draggableProps}

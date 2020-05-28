@@ -40,7 +40,7 @@ interface ListProps {
 
 const List = (props: ListProps) => {
 
-    const {quotes, id} = props;
+    const { quotes, id } = props;
 
     return (
         <Container>
@@ -50,10 +50,10 @@ const List = (props: ListProps) => {
 
             <Droppable droppableId={id} >
                 {(provided, snapshot) => (
-                    <Quotes 
+                    <Quotes
+                        {...provided.droppableProps}
                         isOver={snapshot.isDraggingOver}
                         ref={provided.innerRef}
-                        {...provided.droppableProps}
                     >
                         {quotes.map((quote, i) => (
                             <Quote key={quote.id} {...quote} index={i} />

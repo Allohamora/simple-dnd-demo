@@ -53,19 +53,19 @@ const App = () => {
   const dragEndHandler = (result: DropResult) => {
     const { destination, source } = result;
 
-    if( !destination ) return;
-    if( source.droppableId === destination.droppableId && source.index === destination.index ) return;
+    if (!destination) return;
+    if (source.droppableId === destination.droppableId && source.index === destination.index) return;
 
     const from = state[source.droppableId].quotes;
     const to = state[destination.droppableId].quotes;
 
-    if( source.droppableId === destination.droppableId ) {
+    if (source.droppableId === destination.droppableId) {
       const filtered = [...from.slice(0, source.index), ...from.slice(source.index + 1)];
       const first = filtered.slice(0, destination.index);
       const result = [...first, from[source.index], ...filtered.slice(destination.index)];
 
       setState({
-        ...state, 
+        ...state,
         [source.droppableId]: {
           ...state[source.droppableId],
           quotes: result,
@@ -75,11 +75,11 @@ const App = () => {
     }
 
     const firstTo = to.slice(0, destination.index);
-    const resultTo = [...firstTo, from[source.index] ,...to.slice(destination.index)];
-    const resultFrom = from.filter( (_, i) => !(source.index === i) );
+    const resultTo = [...firstTo, from[source.index], ...to.slice(destination.index)];
+    const resultFrom = from.filter((_, i) => !(source.index === i));
 
     setState({
-      ...state, 
+      ...state,
       [source.droppableId]: {
         ...state[source.droppableId],
         quotes: resultFrom,
@@ -95,17 +95,17 @@ const App = () => {
     <DragDropContext onDragEnd={dragEndHandler} >
       <Container>
         {
-          Object.keys(state).map( id => {
-            const {title, quotes} = state[id];
+          Object.keys(state).map(id => {
+            const { title, quotes } = state[id];
             return (
-              <List 
+              <List
                 key={id}
                 title={title}
                 quotes={quotes}
                 id={id}
               />
             )
-          } )
+          })
         }
       </Container>
     </DragDropContext>
