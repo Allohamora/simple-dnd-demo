@@ -14,6 +14,9 @@ const Container = styled.div`
 
     margin: 5px;
     padding: 5px;
+
+    display: flex;
+    flex-flow: column wrap;
 `;
 
 const Title = styled.h2`
@@ -28,6 +31,7 @@ const Quotes = styled.div<{ isOver: boolean }>`
     background-color: ${props => props.isOver ? "lightblue" : "transparent"};
 
     padding: 5px;
+    flex-grow: 1;
 `;
 
 export type iQuotes = iQuote[];
