@@ -12,9 +12,10 @@ export interface iQuote {
 }
 
 const Container = styled.div`
-    border: 2px solid rgba(0,0,0, .5);
     margin-bottom: 5px;
     padding-left: 2px;
+
+    border: 2px solid rgba(0,0,0, .5);
 `;
 
 const Quote = (props: QuoteProps) => {

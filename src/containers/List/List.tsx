@@ -5,33 +5,36 @@ import { Quote } from 'components/Quote';
 import { iQuote } from 'components/Quote/Quote';
 
 const Container = styled.div`
-    background-color: white;
-    border: 2px solid gray;
-
-    border-radius: 5px;
+    display: flex;
+    flex-flow: column wrap;
 
     width: 100%;
 
     margin: 5px;
     padding: 5px;
 
-    display: flex;
-    flex-flow: column wrap;
+    background-color: white;
+
+    border: 2px solid gray;
+    border-radius: 5px;
 `;
 
 const Title = styled.h2`
+    margin: 0;
+
     text-align: center;
 
     border: 2px solid lightgray;
-    margin: 0;
 `;
 
 const Quotes = styled.div<{ isOver: boolean }>`
+    flex-grow: 1;
+
     min-height: 100px;
-    background-color: ${props => props.isOver ? "lightblue" : "transparent"};
 
     padding: 5px;
-    flex-grow: 1;
+
+    background-color: ${props => props.isOver ? "lightblue" : "transparent"};
 `;
 
 export type iQuotes = iQuote[];

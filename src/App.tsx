@@ -54,40 +54,35 @@ const App = () => {
     const { destination, source } = result;
 
     if (!destination) return;
-    if (source.droppableId === destination.droppableId && source.index === destination.index) return;
 
-    const from = state[source.droppableId].quotes;
-    const to = state[destination.droppableId].quotes;
+    const { index: sIndex, droppableId: sId } = source;
+    const { index: dIndex, droppableId: dId } = destination;
 
-    if (source.droppableId === destination.droppableId) {
-      const filtered = [...from.slice(0, source.index), ...from.slice(source.index + 1)];
-      const first = filtered.slice(0, destination.index);
-      const result = [...first, from[source.index], ...filtered.slice(destination.index)];
+    if (sId === dId && sIndex === dIndex) return;
 
-      setState({
-        ...state,
-        [source.droppableId]: {
-          ...state[source.droppableId],
-          quotes: result,
-        }
-      });
-      return;
-    }
+    const from = state[sId].quotes;
+    const to = state[dId].quotes;
 
-    const firstTo = to.slice(0, destination.index);
-    const resultTo = [...firstTo, from[source.index], ...to.slice(destination.index)];
-    const resultFrom = from.filter((_, i) => !(source.index === i));
+    const resultFrom = [...from.slice(0, sIndex), ...from.slice(sIndex + 1)];
+
+    const resultTo = (sId === dId)
+        ? [ ...resultFrom.slice(0, dIndex), from[sIndex],  ...resultFrom.slice(dIndex)]
+
+        : [ ...to.slice(0, dIndex), from[sIndex], ...to.slice(dIndex) ];
 
     setState({
       ...state,
-      [source.droppableId]: {
-        ...state[source.droppableId],
+
+      [sId]: {
+        ...state[sId],
         quotes: resultFrom,
       },
-      [destination.droppableId]: {
-        ...state[destination.droppableId],
+
+      [dId]: {
+        ...state[dId],
         quotes: resultTo,
       }
+      
     });
   }
 
